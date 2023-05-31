@@ -1,14 +1,38 @@
-<p style="color: green"><%= notice %></p>
-
-<h1>Foods</h1>
-
-<div id="foods">
-  <% @foods.each do |food| %>
-    <%= render food %>
-    <p>
-      <%= link_to "Show this food", food %>
-    </p>
-  <% end %>
+<div id="foods" class="food">
+<div class="intro">
+<h1>Welcome To Food Store</h1>
+<br>
+<p>Here you can add, edit and delete foods.</p>
 </div>
-
-<%= link_to "New food", new_food_path %>
+<div class="add-food">
+<%= link_to 'Add Food', new_food_path %>
+</div>
+<div class="table-cont">
+<table class="table table-striped">
+<thead>
+<tr>
+<th>Index</th>
+<th>Food</th>
+<th>Measurement Unit</th>
+<th>Unit Price</th>
+<th>Quantity</th>
+<th>Actions</th>
+</tr>
+</thead>
+<tbody>
+<% @foods.each_with_index do |food, index| %>
+<tr>
+<td><%= index + 1 %></td>
+<td><%= food.name %></td>
+<td><%= food.measurement_unit %></td>
+<td><%= number_to_currency(food.price) %></td>
+<td><%= food.quantity %></td>
+<td>
+<%= button_to 'Delete', food_path(food), method: :delete, data: { confirm: 'Sure?' } %>
+</td>
+</tr>
+<% end %>
+</tbody>
+</table>
+</div>
+</div>

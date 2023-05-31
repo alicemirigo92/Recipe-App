@@ -1,0 +1,36 @@
+<div class="shopping-cont">
+<h1 class="shopping-title">Shopping List</h1>
+
+<div class="s-food-count">
+  <span>
+    Amount of food items to buy:
+    <span><%= @recipe_foods.present? ? @recipe_foods.length : 0 %></span>
+  </span>
+
+  <span>
+  Total value of food needed:
+  <span>$<%= (@recipe_foods.present? ? @recipe_foods.map { |r| r.food.price.to_i * r.quantity.to_i }.sum : 0) %></span>
+</span>
+</div>
+
+<div class="table-cont">
+<table class="table table-striped">
+<thead>
+<tr>
+<th>Food</th>
+<th>Quantity</th>
+<th>Price</th>
+</tr>
+</thead>
+<tbody>
+<% @recipe_foods.each do |r| %>
+<tr>
+<td><%= r.food.name %></td>
+<td><%= r.quantity %> <%= r.food.measurement_unit %></td>
+<td><%= number_to_currency(r.food.price) %></td>
+</tr>
+<% end %>
+</tbody>
+</table>
+</div>
+</div>

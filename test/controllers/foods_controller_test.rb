@@ -37,7 +37,7 @@ class FoodsControllerTest < ActionDispatch::IntegrationTest
 
   test 'should update food' do
     patch food_url(@food),
-          params: { food: { User_id: @food.User_id, measurement_unit: @food.measurement_unit, name: @food.name,
+          params: { food: { user_id: @food.user_id, measurement_unit: @food.measurement_unit, name: @food.name,
                             price: @food.price, quantity: @food.quantity } }
     assert_redirected_to food_url(@food)
   end

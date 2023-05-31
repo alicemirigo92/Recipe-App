@@ -1,0 +1,10 @@
+<div class="public-recipe-card">
+    <div>
+        <h2><%= link_to recipe.name, recipe_path(recipe.id) %></h2>
+        <p>By: <%= recipe.user.name %></p>
+    </div>
+    <div>
+    <h5>Total food items:<%= recipe.foods.count %></h5>
+    <h3>Total price: <span class=""> $<%= recipe.recipe_foods.includes(:food).map {|r| r.food.price.to_i * r.quantity.to_i }.sum %></span></h3>
+</div>
+</div>
