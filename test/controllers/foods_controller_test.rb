@@ -1,34 +1,36 @@
-require "test_helper"
+require 'test_helper'
 
 class FoodsControllerTest < ActionDispatch::IntegrationTest
   setup do
     @food = foods(:one)
   end
 
-  test "should get index" do
+  test 'should get index' do
     get foods_url
     assert_response :success
   end
 
-  test "should get new" do
+  test 'should get new' do
     get new_food_url
     assert_response :success
   end
 
   test 'should create food' do
     assert_difference('Food.count') do
-      post foods_url, params: { food: { user_id: @food.user_id, measurement_unit: @food.measurement_unit, name: @food.name, price: @food.price, quantity: @food.quantity } }
+      post foods_url,
+           params: { food: { user_id: @food.user_id, measurement_unit: @food.measurement_unit, name: @food.name,
+                             price: @food.price, quantity: @food.quantity } }
     end
 
     assert_redirected_to food_url(Food.last)
   end
 
-  test "should show food" do
+  test 'should show food' do
     get food_url(@food)
     assert_response :success
   end
 
-  test "should get edit" do
+  test 'should get edit' do
     get edit_food_url(@food)
     assert_response :success
   end
@@ -38,8 +40,8 @@ class FoodsControllerTest < ActionDispatch::IntegrationTest
     assert_redirected_to food_url(@food)
   end
 
-  test "should destroy food" do
-    assert_difference("Food.count", -1) do
+  test 'should destroy food' do
+    assert_difference('Food.count', -1) do
       delete food_url(@food)
     end
 
