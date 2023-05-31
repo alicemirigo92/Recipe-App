@@ -14,13 +14,13 @@ class RecipesTest < ApplicationSystemTestCase
     visit recipes_url
     click_on "New recipe"
 
-    fill_in "User", with: @recipe.user_id
-    fill_in "Cooking-time", with: @recipe.cooking-time
-    fill_in "Description", with: @recipe.description
-    fill_in "Name", with: @recipe.name
-    fill_in "Preparation-time", with: @recipe.preparation-time
-    check "Public" if @recipe.public
-    click_on "Create Recipe"
+    fill_in 'User', with: @recipe.User_id
+    fill_in 'Cooking-time', with: @recipe.cooking - time
+    fill_in 'Description', with: @recipe.description
+    fill_in 'Name', with: @recipe.name
+    fill_in 'Preparation-time', with: @recipe.preparation - time
+    check 'Public' if @recipe.public
+    click_on 'Create Recipe'
 
     assert_text "Recipe was successfully created"
     click_on "Back"
@@ -30,13 +30,13 @@ class RecipesTest < ApplicationSystemTestCase
     visit recipe_url(@recipe)
     click_on "Edit this recipe", match: :first
 
-    fill_in "User", with: @recipe.user_id
-    fill_in "Cooking-time", with: @recipe.cooking-time
-    fill_in "Description", with: @recipe.description
-    fill_in "Name", with: @recipe.name
-    fill_in "Preparation-time", with: @recipe.preparation-time
-    check "Public" if @recipe.public
-    click_on "Update Recipe"
+    fill_in 'User', with: @recipe.User_id
+    fill_in 'Cooking-time', with: @recipe.cooking - time
+    fill_in 'Description', with: @recipe.description
+    fill_in 'Name', with: @recipe.name
+    fill_in 'Preparation-time', with: @recipe.preparation - time
+    check 'Public' if @recipe.public
+    click_on 'Update Recipe'
 
     assert_text "Recipe was successfully updated"
     click_on "Back"
