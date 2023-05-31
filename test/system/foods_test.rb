@@ -14,8 +14,8 @@ class FoodsTest < ApplicationSystemTestCase
     visit foods_url
     click_on 'New food'
 
-    fill_in 'User', with: @food.User_id
-    fill_in 'Measurement-unit', with: @food.measurement - unit
+    fill_in 'User', with: @food.user_id
+    fill_in 'Measurement_unit', with: @food.measurement_unit
     fill_in 'Name', with: @food.name
     fill_in 'Price', with: @food.price
     fill_in 'Quantity', with: @food.quantity
@@ -29,8 +29,8 @@ class FoodsTest < ApplicationSystemTestCase
     visit food_url(@food)
     click_on 'Edit this food', match: :first
 
-    fill_in 'User', with: @food.User_id
-    fill_in 'Measurement-unit', with: @food.measurement - unit
+    fill_in 'User', with: @food.user_id
+    fill_in 'Measurement-unit', with: @food.measurement_unit
     fill_in 'Name', with: @food.name
     fill_in 'Price', with: @food.price
     fill_in 'Quantity', with: @food.quantity
