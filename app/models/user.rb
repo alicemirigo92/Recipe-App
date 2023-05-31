@@ -4,5 +4,4 @@ class User < ApplicationRecord
   validates :name, presence: true
 end
 
-# has_many :foods, foreign_key: :user_id, dependent: :destroy
-# has_many :recipe, foreign_key: :user_id, dependent: :destroy
+
