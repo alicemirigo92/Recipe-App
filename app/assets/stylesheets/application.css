@@ -14,7 +14,7 @@ a {
 }
 
 body {
-  width: 80%;
+  width: 100%;
   height: 100%;
 }
 
@@ -24,8 +24,8 @@ body {
 }
 
 .New {
-  width: 100%;
-  margin: 100px;
+  width: 80%;
+  margin: 150px;
   padding: 20px;
   border: 5px solid black;
   text-align: center;
@@ -46,8 +46,8 @@ body {
 }
 
 .food {
-  width: 100%;
-  margin: 100px;
+  width: 80%;
+  margin: 150px;
   padding: 20px;
   border: 5px solid black;
 }
@@ -76,6 +76,7 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
+  margin-bottom: 20px;
 }
 
 .table {
@@ -96,10 +97,6 @@ td {
   background-color: #eee;
 }
 
-tr:nth-child(even) {
-  background-color: white;
-}
-
 .recipe-container {
   display: flex;
   margin-top: 100px;
@@ -110,6 +107,7 @@ tr:nth-child(even) {
 .recipe-div {
   display: flex;
   border: 1px solid black;
+  border-radius: 10px;
   padding: 20px;
   margin: 20px auto;
   width: 70%;
@@ -121,15 +119,25 @@ tr:nth-child(even) {
   padding: 15px;
   border-radius: 10px;
   border: none;
+  margin-top: 5px;
+}
+
+.recipe-remove-btn:hover {
+  background-color: #000;
+  color: #fff;
 }
 
 .recipe-btn {
-  padding: 10px;
-  width: 150px;
+  padding: 20px;
+  width: 140px;
   align-self: center;
   border-radius: 10px;
-  border: none;
-  background-color: lightblue;
+  border: 1px solid black;
+}
+
+.recipe-btn:hover {
+  background-color: #000;
+  color: #fff;
 }
 
 .new_recipe_form {
@@ -137,6 +145,7 @@ tr:nth-child(even) {
   flex-direction: column;
   align-items: center;
   margin-top: 100px;
+  margin-left: 30%;
   border: 1px solid black;
   padding: 100px;
   gap: 20px;
@@ -152,4 +161,253 @@ tr:nth-child(even) {
 .recipe-field input {
   padding: 10px;
   border-radius: 10px;
+}
+
+.recipe-detail-title {
+  text-align: center;
+  margin: 50px 0 70px;
+}
+
+.recipe-detail-container {
+  display: flex;
+  flex-direction: column;
+  padding: 100px;
+  gap: 20px;
+  margin: 0 auto;
+}
+
+.recipe-detail {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 50px;
+}
+
+.recipe-detail-btns {
+  display: flex;
+  justify-content: space-between;
+}
+
+.recipe-det-link {
+  padding: 10px;
+  text-align: center;
+  width: 190px;
+  align-self: center;
+  border-radius: 10px;
+  border: 1px solid black;
+}
+
+.recipe-det-link:hover {
+  background-color: #000;
+  color: #fff;
+}
+
+.public-status-div {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 20px;
+}
+
+.switch {
+  position: relative;
+  display: inline-block;
+  width: 60px;
+  height: 34px;
+}
+
+/* Hide default HTML checkbox */
+.switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+/* The slider */
+.slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #ccc;
+  -webkit-transition: 0.4s;
+  transition: 0.4s;
+}
+
+.slider::before {
+  position: absolute;
+  content: "";
+  height: 26px;
+  width: 26px;
+  left: 4px;
+  bottom: 4px;
+  background-color: white;
+  -webkit-transition: 0.4s;
+  transition: 0.4s;
+}
+
+input:checked + .slider {
+  background-color: #2196f3;
+}
+
+input:focus + .slider {
+  box-shadow: 0 0 1px #2196f3;
+}
+
+input:checked + .slider::before {
+  -webkit-transform: translateX(26px);
+  -ms-transform: translateX(26px);
+  transform: translateX(26px);
+}
+
+/* Rounded sliders */
+.slider.round {
+  border-radius: 34px;
+}
+
+.slider.round::before {
+  border-radius: 50%;
+}
+
+.shopping-cont,
+.card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 80%;
+  margin: 150px;
+  padding: 50px;
+  border: 5px solid black;
+}
+
+.shopping-title,
+.card-header {
+  text-align: center;
+  margin: 50px;
+  font-size: 40px;
+}
+
+.field-recipe {
+  display: flex;
+  align-items: flex-start;
+  padding: 15px;
+}
+
+.actions-recipe {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px;
+}
+
+.s-food-count {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-weight: bold;
+  width: 45%;
+  margin-bottom: 50px;
+}
+
+.navbar-brand {
+  display: flex;
+  align-items: center;
+  padding: 20px;
+  background-color: #000;
+  color: #fff;
+  width: 100%;
+}
+
+.navbar-title {
+  font-size: 30px;
+  font-weight: bold;
+  width: 40%;
+}
+
+.navbar-collapse {
+  display: flex;
+  margin: 0 20px;
+  width: 100%;
+}
+
+.navbar-nav {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.nav-item {
+  display: flex;
+  align-items: center;
+  padding: 20px;
+}
+
+.nav-item a {
+  color: #fff;
+  font-size: 20px;
+  font-weight: bold;
+}
+
+.recipe-foods-table {
+  margin: 0 auto;
+  width: 80%;
+}
+
+.table-header-title {
+  text-align: center;
+}
+
+.actions-col {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.public-recipes-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin-top: 30px;
+  gap: 20px;
+  align-items: center;
+}
+
+.public-recipe-card {
+  display: flex;
+  width: 80%;
+  justify-content: space-around;
+  border: 1px solid black;
+  padding: 40px;
+  align-items: center;
+}
+
+.login-title {
+  text-align: center;
+  margin: 50px;
+  font-size: 40px;
+}
+
+.login-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 20px;
+  align-items: center;
+}
+
+.login-container input {
+  padding: 10px;
+  border-radius: 10px;
+}
+
+.login-links {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 100%;
+  align-items: center;
+  margin-top: 15px;
 }

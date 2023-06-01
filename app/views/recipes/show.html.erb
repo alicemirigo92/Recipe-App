@@ -1,4 +1,28 @@
-<h1>Recipe Details</h1>
-<%= @recipe.name %><br/>
-<%= @recipe.description %><br/>
-<%= @recipe.public %><br/>
+<h1 class="recipe-detail-title"><%= @recipe.name %></h1>
+<div class="recipe-detail-container">
+    <div class="recipe-detail">
+        <p>Preparation time: <%= @recipe.preparation_time %></p>
+        <p>
+        Status:
+        <% if @recipe.public %>
+        <span class="badge text-bg-warning p-2 px-4">Public</span>
+        <% else %>
+          <span class="badge text-bg-secondary p-2 px-4">Private</span>
+      <% end %>
+      <%= button_to "Make it #{@recipe.public ? 'private' : 'public'}", recipe_path(@recipe.id), method: :patch %>
+      <label class="switch mt-4">
+      <input type="checkbox",recipe_path(@recipe.id), method: :patch>
+      <span class="slider round"></span>
+    </label>
+      </p>
+    </div>
+    <p>cooking time: <%= @recipe.cooking_time %></p>
+    <p>Steps go here</p>
+   
+    <div class="recipe-detail-btns">
+        <button>Generate shopping list</button>
+        <button>Add ingredient</button>
+    </div>
+    <hr/>
+   
+</div>

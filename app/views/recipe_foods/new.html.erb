@@ -1,9 +1,23 @@
-<h1>New recipe food</h1>
+<div class="card">
+  <div class="card-header">
+    <h3 class="card-title">Add Ingredient</h3>
+  </div>
 
-<%= render "form", recipe_food: @recipe_food %>
-
-<br>
-
-<div>
-  <%= link_to "Back to recipe foods", recipe_foods_path %>
+  <div class="card-body">
+  <% if @foods.present? %>
+    <%= form_with model: @recipe_food, url: recipe_recipe_foods_url do |f| %>
+      <div class="field-recipe">
+        <%= f.select :food_id, @foods.map { |food| [food.name, food.id] }, {}, { class: "form-control"} %>
+      </div>
+      <div class="field-recipe">
+        <%= f.number_field :quantity, placeholder: 'Quantity', min: 0, required: true, class: "form-control" %>
+      </div>
+      <div class="actions-recipe">
+        <%= f.submit "Add Ingredient", class: 'btn' %>
+      </div>
+    <% end %>
+  <% else %>
+    <h3>No food available for <%= current_user.name %> head over to <%= link_to "foods page", foods_path %> to add new food</h3>
+<% end %>
+  </div>
 </div>

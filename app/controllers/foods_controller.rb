@@ -1,25 +1,18 @@
 class FoodsController < ApplicationController
   before_action :set_food, only: %i[show edit update destroy]
 
-  # GET /foods or /foods.json
   def index
     @foods = current_user.foods
   end
 
-  # GET /foods/1 or /foods/1.json
   def show
     @food = Food.find(params[:id])
   end
 
-  # GET /foods/new
   def new
     @food = Food.new
   end
 
-  # # GET /foods/1/edit
-  # def edit; end
-
-  # POST /foods or /foods.json
   def create
     @food = current_user.foods.build(food_params)
 
