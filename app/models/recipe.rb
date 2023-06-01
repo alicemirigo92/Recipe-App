@@ -6,6 +6,6 @@ class Recipe < ApplicationRecord
   validates :cooking_time, presence: true
   validates :description, presence: true
 
-  has_many :recipe_foods
+  has_many :recipe_foods, dependent: :destroy
   has_many :foods, through: :recipe_foods
 end
