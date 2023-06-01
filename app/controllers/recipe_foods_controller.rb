@@ -1,51 +1,51 @@
 class RecipeFoodsController < ApplicationController
-  def index
-    @recipes = current_user.recipes.all
-    @recipe_foods = RecipeFood.all
-    @user = current_user
-  end
-
-  def show
-    @recipe = Recipe.find(params[:id])
-  end
-
   def new
-    @user = current_user
-    @recipe = Recipe.new
+    @recipe_food = RecipeFood.new
+    @foods = Food.all
+    @recipe = Recipe.find(params[:recipe_id])
   end
 
   def create
-    @recipe = Recipe.new(post_params)
-    @recipe.user = current_user
-    if @recipe.save
-      flash.now[:success] = 'Recipe successfully created'
-      redirect_to recipes_path(current_user, @recipe)
+    @recipe = Recipe.find(params[:recipe_id])
+    @recipe_food = RecipeFood.new(recipe_food_params)
+    @recipe_food.recipe_id = params[:recipe_id]
+
+    if @recipe_food.save
+      redirect_to recipe_path(@recipe_food.recipe_id), notice: 'Recipe Food successfully added!'
     else
-      flash[:error] = 'Error: Recipe not created'
-      redirect_to new_recipe_path(@recipe.user)
+      render 'new', notice: 'Something went wrong!'
     end
   end
 
-  def update
-    recipe = Recipe.find(params[:id])
-    recipe.update(public: !recipe.public)
+  def edit
+    @recipe_food = RecipeFood.find(params[:id])
+    @foods = Food.all
+  end
 
-    redirect_to recipe_path(recipe.id), notice: "The recipe is now #{recipe.public ? 'public' : 'private'}!"
+  def update
+    @recipe_food = RecipeFood.find(params[:id])
+
+    if @recipe_food.update(recipe_food_params)
+      redirect_to recipe_path(@recipe_food.recipe_id), notice: 'Recipe Food successfully updated!'
+    else
+      render 'edit', notice: 'Something went wrong!'
+    end
   end
 
   def destroy
-    @recipe = Recipe.find(params[:id])
-    @recipe.destroy
+    @recipe_food = RecipeFood.find(params[:id])
+    @recipe_food.destroy
 
-    if @recipe&.destroy
-      redirect_to recipes_path, notice: 'Recipe successfully deleted!'
+    if @recipe_food&.destroy
+      redirect_to recipe_path(@recipe_food.recipe_id), notice: 'Recipe Food successfully deleted!'
     else
       render 'new', notice: 'Something went wrong!'
     end
   end
 
   private
-  def post_params
-    params.require(:recipe_food).permit(:quantity, :recipe_id, :food_id)
+
+  def recipe_food_params
+    params.require(:recipe_food).permit(:food_id, :quantity)
   end
 end
