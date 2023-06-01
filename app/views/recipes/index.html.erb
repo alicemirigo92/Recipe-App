@@ -1,14 +1,6 @@
-<p style="color: green"><%= notice %></p>
-
-<h1>Recipes</h1>
-
-<div id="recipes">
-  <% @recipes.each do |recipe| %>
-    <%= render recipe %>
-    <p>
-      <%= link_to "Show this recipe", recipe %>
-    </p>
-  <% end %>
+<div class="recipe-container">
+    <% @recipes.each do |recipe| %>
+        <%= render 'shared/recipe', recipe: recipe %>
+    <% end %>
+    <button class="recipe-btn"> <%= link_to "ADD RECIPE", new_recipe_path %></button>
 </div>
-
-<%= link_to "New recipe", new_recipe_path %>
