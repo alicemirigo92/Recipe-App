@@ -1,4 +1,5 @@
 <h1 class="recipe-detail-title"><%= @recipe.name %></h1>
+<%# <%= render 'recipe_details'%>
 <div class="recipe-detail-container">
     <div class="recipe-detail">
         <p>Preparation time: <%= @recipe.preparation_time %></p>
@@ -21,8 +22,30 @@
    
     <div class="recipe-detail-btns">
         <button>Generate shopping list</button>
-        <button>Add ingredient</button>
+        <%= link_to "Add ingredient", new_recipe_recipe_food_path(@recipe) %>
     </div>
     <hr/>
+    <table class="recipe-list-table">
+      <thead>
+        <tr>
+          <th>Item</th>
+          <th>Quantity</th>
+          <th>Value $</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @recipe_foods.each do |item| %>
+          <tr>
+            <td><%= item.food.name %></td>
+            <td><%= item.food.quantity %></td>
+            <td><%= item.food.price %></td>
+            <td class="actions" style="display: flex; gap: 0.5rem; justify-content: center;"><%= button_to "Modify" %> <%= button_to "Remove", [@recipe, item], method: :delete %></td> 
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+</div>
    
 </div>
