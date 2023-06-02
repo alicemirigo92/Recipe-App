@@ -11,15 +11,19 @@ class RecipeFoodsController < ApplicationController
 
   def new
     @user = current_user
-    @recipe = Recipe.new
+    @recipe = RecipeFood.new
   end
 
   def create
-    @recipe = Recipe.new(post_params)
-    @recipe.user = current_user
-    if @recipe.save
+    quantity = params[:quantity]
+    food = Food.find(params[:food_id])
+    recipe = Recipe.find(params[:recipe_id]) 
+  
+    @recipe_food = RecipeFood.new(quantity:quantity, food_id: food.id, recipe_id: recipe.id)
+    @recipe_food.recipe_id = recipe.id
+    if @recipe_food.save
       flash.now[:success] = 'Recipe successfully created'
-      redirect_to recipes_path(current_user, @recipe)
+      redirect_to recipe_path(recipe.id)
     else
       flash[:error] = 'Error: Recipe not created'
       redirect_to new_recipe_path(@recipe.user)
@@ -46,6 +50,6 @@ class RecipeFoodsController < ApplicationController
 
   private
   def post_params
-    params.require(:recipe_food).permit(:quantity, :recipe_id, :food_id)
+    params.require(:recipe).permit(:quantity, :food_id)
   end
 end
