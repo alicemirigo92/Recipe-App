@@ -4,10 +4,10 @@
   </div>
 
   <div class="card-body">
-  <% if @foods.present? %>
-    <%= form_with model: @recipe_food, url: recipe_recipe_foods_url do |f| %>
+  
+    <%= form_with(model: @recipe_food, url: recipe_recipe_foods_path, method: :post) do |f| %>
       <div class="field-recipe">
-        <%= f.select :food_id, @foods.map { |food| [food.name, food.id] }, {}, { class: "form-control"} %>
+        <%= f.collection_select :food_id, Food.all, :id, :name, class: "form-control" %>
       </div>
       <div class="field-recipe">
         <%= f.number_field :quantity, placeholder: 'Quantity', min: 0, required: true, class: "form-control" %>
@@ -15,9 +15,7 @@
       <div class="actions-recipe">
         <%= f.submit "Add Ingredient", class: 'btn' %>
       </div>
-    <% end %>
-  <% else %>
-    <h3>No food available for <%= current_user.name %> head over to <%= link_to "foods page", foods_path %> to add new food</h3>
-<% end %>
+    
+  <%end%>
   </div>
 </div>

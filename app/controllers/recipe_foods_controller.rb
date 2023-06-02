@@ -1,44 +1,45 @@
 class RecipeFoodsController < ApplicationController
-  def index
-    @recipes = current_user.recipes.all
-    @recipe_foods = RecipeFood.all
-    @user = current_user
-  end
-
-  def show
-    @recipe = Recipe.find(params[:id])
-  end
-
   def new
     @user = current_user
-    @recipe = Recipe.new
+    @recipe = RecipeFood.new
   end
 
   def create
-    @recipe = Recipe.new(post_params)
-    @recipe.user = current_user
-    if @recipe.save
+    quantity = params[:quantity]
+    food = Food.find(params[:food_id])
+    recipe = Recipe.find(params[:recipe_id])
+
+    @recipe_food = RecipeFood.new(quantity:, food_id: food.id, recipe_id: recipe.id)
+    @recipe_food.recipe_id = recipe.id
+    if @recipe_food.save
       flash.now[:success] = 'Recipe successfully created'
-      redirect_to recipes_path(current_user, @recipe)
+      redirect_to recipe_path(recipe.id)
     else
-      flash[:error] = 'Error: Recipe not created'
-      redirect_to new_recipe_path(@recipe.user)
+      render 'new', notice: 'Something went wrong!'
     end
   end
 
-  def update
-    recipe = Recipe.find(params[:id])
-    recipe.update(public: !recipe.public)
+  def edit
+    @recipe_food = RecipeFood.find(params[:id])
+    @foods = Food.all
+  end
 
-    redirect_to recipe_path(recipe.id), notice: "The recipe is now #{recipe.public ? 'public' : 'private'}!"
+  def update
+    @recipe_food = RecipeFood.find(params[:id])
+
+    if @recipe_food.update(recipe_food_params)
+      redirect_to recipe_path(@recipe_food.recipe_id), notice: 'Recipe Food successfully updated!'
+    else
+      render 'edit', notice: 'Something went wrong!'
+    end
   end
 
   def destroy
-    @recipe = Recipe.find(params[:id])
-    @recipe.destroy
+    @recipe_food = RecipeFood.find(params[:id])
+    @recipe_food.destroy
 
-    if @recipe&.destroy
-      redirect_to recipes_path, notice: 'Recipe successfully deleted!'
+    if @recipe_food&.destroy
+      redirect_to recipe_path(@recipe_food.recipe_id), notice: 'Recipe Food successfully deleted!'
     else
       render 'new', notice: 'Something went wrong!'
     end
@@ -47,6 +48,6 @@ class RecipeFoodsController < ApplicationController
   private
 
   def post_params
-    params.require(:recipe_food).permit(:quantity, :recipe_id, :food_id)
+    params.require(:recipe).permit(:quantity, :food_id)
   end
 end
