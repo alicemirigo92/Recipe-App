@@ -1,0 +1,36 @@
+<div class="shopping-cont">
+<h1 class="shopping-title">Shopping List</h1>
+
+<div class="s-food-count">
+  <span>
+    Amount of food items to buy:
+    <span><%= @total_items %></span>
+  </span>
+
+  <span>
+   Total value of food needed:
+   <span></span>
+ </span>$<%= @total_price %>
+</div>
+
+<div class="table-cont">
+<table class="table table-striped">
+<thead>
+<tr>
+<th>Food</th>
+<th>Quantity</th>
+<th>Price</th>
+</tr>
+</thead>
+<tbody>
+<% @shopping_list.each do |r| %>
+<tr>
+<td><%= r.name %></td>
+<td><%= r.quantity %> <%= r.measurement_unit %></td>
+<td><%= number_to_currency(r.price) %></td>
+</tr>
+<% end %>
+</tbody>
+</table>
+</div>
+</div>

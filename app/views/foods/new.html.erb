@@ -1,9 +1,26 @@
-<h1>New food</h1>
-
-<%= render "form", food: @food %>
-
+<div class="New">
+<h1>New Food</h1>
 <br>
-
-<div>
-  <%= link_to "Back to foods", foods_path %>
+<%= form_with model: @food, url: foods_path, local: true do |f| %>
+  <div class="food-field">
+    <%= f.label :name %>
+    <%= f.text_field :name, required: true %>
+  </div>
+    <div class="food-field">
+    <%= f.label :measurement_unit %>
+    <%= f.select :measurement_unit, ['grams', 'ounces', 'cups', 'tablespoons', 'teaspoons','pounds', 'kilos'], {}, { required: true } %>
+  </div>
+    <div class="food-field">
+    <%= f.label :price %>
+    <%= f.number_field :price, required: true %>
+  </div>
+    <div class="food-field">
+    <%= f.label :quantity %>
+    <%= f.number_field :quantity, required: true %>
+  </div>
+  <div class="submit">
+  <%= f.submit 'Add' %>
+  <button><%= link_to 'Cancel', foods_path %></button>
+  </div>
+  <% end %>
 </div>
