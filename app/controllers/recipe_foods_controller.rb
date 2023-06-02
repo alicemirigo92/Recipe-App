@@ -45,6 +45,7 @@ class RecipeFoodsController < ApplicationController
   end
 
   private
+
   def post_params
     params.require(:recipe_food).permit(:quantity, :recipe_id, :food_id)
   end
