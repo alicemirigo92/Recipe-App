@@ -7,9 +7,9 @@ class RecipeFoodsController < ApplicationController
   def create
     quantity = params[:quantity]
     food = Food.find(params[:food_id])
-    recipe = Recipe.find(params[:recipe_id]) 
-  
-    @recipe_food = RecipeFood.new(quantity:quantity, food_id: food.id, recipe_id: recipe.id)
+    recipe = Recipe.find(params[:recipe_id])
+
+    @recipe_food = RecipeFood.new(quantity:, food_id: food.id, recipe_id: recipe.id)
     @recipe_food.recipe_id = recipe.id
     if @recipe_food.save
       flash.now[:success] = 'Recipe successfully created'
@@ -46,6 +46,7 @@ class RecipeFoodsController < ApplicationController
   end
 
   private
+
   def post_params
     params.require(:recipe).permit(:quantity, :food_id)
   end

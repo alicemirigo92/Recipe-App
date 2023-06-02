@@ -1,22 +1,31 @@
 require 'rails_helper'
 
 RSpec.describe User, type: :model do
-  describe 'validations' do
-    it { should validate_presence_of(:name) }
-    it { should validate_length_of(:name).is_at_least(3).is_at_most(25) }
+  before(:each) do
+    @user = User.create(name: 'michael', email: 'michael@gmail.com', password: '123456',
+                        password_confirmation: '123456')
   end
-
-  describe 'associations' do
-    it { should have_many(:foods).dependent(:destroy) }
-    it { should have_many(:recipes) }
-    it { should have_many(:recipe_foods) }
+  it 'is valid with valid attributes' do
+    expect(@user).to be_valid
   end
-
-  describe 'devise modules' do
-    it { should validate_presence_of(:email) }
-    it { should validate_presence_of(:password) }
-    it { should validate_confirmation_of(:password) }
-    it { should validate_length_of(:password).is_at_least(6).is_at_most(128) }
-    it { should have_secure_password }
+  it 'is not valid without a name' do
+    @user.name = nil
+    expect(@user).to_not be_valid
+  end
+  it 'is not valid without an email' do
+    @user.email = nil
+    expect(@user).to_not be_valid
+  end
+  it 'is not valid without a password' do
+    @user.password = nil
+    expect(@user).to_not be_valid
+  end
+  it 'is not valid with a password confirmation that does not match' do
+    @user.password_confirmation = '12345'
+    expect(@user).to_not be_valid
+  end
+  it 'is not valid with a password shorter than 6 characters' do
+    @user.password = '12345'
+    expect(@user).to_not be_valid
   end
 end

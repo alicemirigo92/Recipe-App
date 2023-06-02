@@ -1,5 +1,5 @@
 class ShoppingListController < ApplicationController
-    before_action :authenticate_user!
+  before_action :authenticate_user!
   def index
     params[:recipe_id]
     @user = current_user
