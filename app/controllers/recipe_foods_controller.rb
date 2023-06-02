@@ -1,14 +1,4 @@
 class RecipeFoodsController < ApplicationController
-  def index
-    @recipes = current_user.recipes.all
-    @recipe_foods = RecipeFood.all
-    @user = current_user
-  end
-
-  def show
-    @recipe = Recipe.find(params[:id])
-  end
-
   def new
     @user = current_user
     @recipe = RecipeFood.new
@@ -25,24 +15,31 @@ class RecipeFoodsController < ApplicationController
       flash.now[:success] = 'Recipe successfully created'
       redirect_to recipe_path(recipe.id)
     else
-      flash[:error] = 'Error: Recipe not created'
-      redirect_to new_recipe_path(@recipe.user)
+      render 'new', notice: 'Something went wrong!'
     end
   end
 
-  def update
-    recipe = Recipe.find(params[:id])
-    recipe.update(public: !recipe.public)
+  def edit
+    @recipe_food = RecipeFood.find(params[:id])
+    @foods = Food.all
+  end
 
-    redirect_to recipe_path(recipe.id), notice: "The recipe is now #{recipe.public ? 'public' : 'private'}!"
+  def update
+    @recipe_food = RecipeFood.find(params[:id])
+
+    if @recipe_food.update(recipe_food_params)
+      redirect_to recipe_path(@recipe_food.recipe_id), notice: 'Recipe Food successfully updated!'
+    else
+      render 'edit', notice: 'Something went wrong!'
+    end
   end
 
   def destroy
-    @recipe = Recipe.find(params[:id])
-    @recipe.destroy
+    @recipe_food = RecipeFood.find(params[:id])
+    @recipe_food.destroy
 
-    if @recipe&.destroy
-      redirect_to recipes_path, notice: 'Recipe successfully deleted!'
+    if @recipe_food&.destroy
+      redirect_to recipe_path(@recipe_food.recipe_id), notice: 'Recipe Food successfully deleted!'
     else
       render 'new', notice: 'Something went wrong!'
     end
